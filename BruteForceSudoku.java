@@ -1,4 +1,4 @@
-public class Sudoku{
+public class BruteForceSudoku{
     private int [][] SudokuGrid;
     private static final int COLUMNS = 9;
     private static final int ROWS = 9;

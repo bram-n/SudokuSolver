@@ -1,6 +1,6 @@
 public class Test {
     public static void main(String[] args) {
-        Sudoku sudokuSolver = new Sudoku();
+        BruteForceSudoku sudokuSolver = new BruteForceSudoku();
 
         // Test Case 1: Easy Puzzle
         int[][] easyPuzzle = {

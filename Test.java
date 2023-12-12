@@ -2,6 +2,7 @@ public class Test {
     public static void main(String[] args) {
         BruteForceSudoku sudokuSolver = new BruteForceSudoku();
 
+        long timeA = System.nanoTime();
         // Test Case 1: Easy Puzzle
         int[][] easyPuzzle = {
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
@@ -21,8 +22,11 @@ public class Test {
         printSudokuGrid(easyPuzzle);
         System.out.println("Is Solved: " + solved1);
         System.out.println();
+        long timeB = System.nanoTime();
+        System.out.println("Elapsed time: " + (timeB - timeA));
 
         // Test Case 2: Medium Puzzle
+        long timeC = System.nanoTime();
         int[][] mediumPuzzle = {
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 7, 2, 1, 9, 5, 3, 4, 8},
@@ -41,8 +45,11 @@ public class Test {
         printSudokuGrid(mediumPuzzle);
         System.out.println("Is Solved: " + solved2);
         System.out.println();
+        long timeD = System.nanoTime();
+        System.out.println("Elapsed time: " + (timeD - timeC));
 
         // Test Case 3: Hard Puzzle
+        long timeE = System.nanoTime();
         int[][] hardPuzzle = {
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 7, 0, 1, 9, 5, 0, 0, 0},
@@ -60,6 +67,9 @@ public class Test {
         System.out.println("Solved Puzzle:");
         printSudokuGrid(hardPuzzle);
         System.out.println("Is Solved: " + solved3);
+        long timeF = System.nanoTime();
+        System.out.println(timeF);
+        System.out.println("Elapsed time: " + (timeF - timeE));
     }
 
     private static void printSudokuGrid(int[][] grid) {

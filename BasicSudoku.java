@@ -333,9 +333,9 @@ public class BasicSudoku{
         else if(!constraintTwo(d, calcBox(getRow(s), getCol(s)), candidates, BOXES)){
             return null;
         }
-        if(!constraintThree(d, calcBox(getRow(s), getCol(s)), candidates, BOXES)){
-            return null;
-        }
+        // if(!constraintThree(d, calcBox(getRow(s), getCol(s)), candidates, BOXES)){
+        //     return null;
+        // }
         else{
             return candidates;
         }
@@ -591,25 +591,24 @@ public class BasicSudoku{
         String maxPuzzle = "";
         for(int n = 1; n <= puzzles.size(); n ++){
             String grid = puzzles.get(n);
-            Instant start = Instant.now();
+            long start = System.nanoTime();
             search(parseGrid(grid));
-            Instant end = Instant.now();
-            Duration timeElapsed = Duration.between(start, end);
-            if(max <= timeElapsed.toNanos()){
-                max = timeElapsed.toNanos();
+            long end = System.nanoTime();
+            long timeElapsed = end-start;
+            if(max <= timeElapsed){
+                max = timeElapsed;
                 maxPuzzle = grid;
             }
-            if(min >= timeElapsed.toNanos()){
-                min = timeElapsed.toNanos();
+            if(min >= timeElapsed){
+                min = timeElapsed;
             }
-            avg += timeElapsed.toNanos();
+            avg += timeElapsed;
         }
         avg /= puzzles.size();
         System.out.println("Average solve time (nanoseconds): " + avg);
         System.out.println("Max solve time (nanoseconds): " + max);
         System.out.println("Min solve time (nanoseconds): "+min);
         System.out.println("Hardest puzzle: " + maxPuzzle);
-        System.out.println(constraintThreeCounter/puzzles.size());
     }
 
     /**
@@ -735,10 +734,10 @@ public class BasicSudoku{
         // System.out.println("Hardest puzzle: " + maxPuzzle);
         // System.out.println(su.constraintThreeCounter/10000);
         // su.parsePuzzles(su.parseFile(new File("HardPuzzles.txt")));
-        System.out.println(su.solve(su.parseFile(new File("HardPuzzles.txt")).get(2)));
-        System.out.println("Constraint One: "+ su.constraintOneCounter);
-        System.out.println("Constraint Two: "+ su.constraintTwoCounter);
-        System.out.println("Constraint Three: "+ su.constraintThreeCounter);
-        System.out.println("Random Assignments: " + su.randomAssignmentCounter);
+        su.parsePuzzles(su.parseFile(new File("HardPuzzles.txt")));
+        // System.out.println("Constraint One: "+ su.constraintOneCounter);
+        // System.out.println("Constraint Two: "+ su.constraintTwoCounter);
+        // System.out.println("Constraint Three: "+ su.constraintThreeCounter);
+        // System.out.println("Random Assignments: " + su.randomAssignmentCounter);
     }
 }

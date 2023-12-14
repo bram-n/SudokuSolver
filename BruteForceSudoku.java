@@ -1,3 +1,6 @@
+import java.io.File;
+import java.util.Scanner;
+
 public class BruteForceSudoku{
     private int [][] SudokuGrid;
     private static final int COLUMNS = 9;
@@ -70,6 +73,56 @@ public class BruteForceSudoku{
             
         }
         return false;
+    }
+
+    public void parsePuzzles(){
+        try{
+            Scanner scan = new Scanner(new File("HardPuzzles.txt"));
+            long max = 0;
+            long avg = 0;
+            long min = Long.MAX_VALUE;
+            String maxPuzzle = "";
+            while(scan.hasNextLine()){
+                String newLine = scan.nextLine();
+                String[] line = newLine.split("");
+                int[][] grid = new int [9][9];
+                for(int i = 0; i < 9; i ++){
+                    for(int j = 0; j <9; j ++){
+                        if(line[9*i + j].equals(".")){
+                            grid[i][j] = 0;
+                        }
+                        else{
+                            grid[i][j] = Integer.valueOf(line[9*i+j]);
+                        }
+                    }
+                }
+                long start = System.nanoTime();
+                solvePuzzle(grid);
+                long end = System.nanoTime();
+                long timeElapsed = end-start;
+                if(max <= timeElapsed){
+                    max = timeElapsed;
+                    maxPuzzle = newLine;
+                }
+                if(min >= timeElapsed){
+                    min = timeElapsed;
+                }
+                avg += timeElapsed;
+            }
+            avg /= 95;
+            System.out.println("Average solve time (nanoseconds): " + avg);
+            System.out.println("Max solve time (nanoseconds): " + max);
+            System.out.println("Min solve time (nanoseconds): "+min);
+            System.out.println("Hardest puzzle: " + maxPuzzle);
+        }
+        catch(Exception e){
+            System.out.println("file don't exist yo");
+        }
+    }
+
+    public static void main(String[] args) {
+        BruteForceSudoku bfs = new BruteForceSudoku();
+        bfs.parsePuzzles();
     }
 }
 
